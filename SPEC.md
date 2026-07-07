@@ -29,6 +29,16 @@ freely as research interests evolve; a specific sentence revised annually beats
 a vague evergreen one. The durable identity (storyteller who codes, data
 visualization as narrative medium) lives on `/about/`.
 
+## Authorship and voice
+
+The agent maintains the site and drafts mechanics; the prose voice is
+Steven's. AI assists with writing, but Steven directs what gets said and
+edits heavily before anything is publishable. The value of a personal blog
+in the AI-slop era is that it reads as a specific human's genuine
+perspective; prose that smells generated damages the brand with exactly the
+audience that matters. The agent-built workflow is not a secret but brand
+material: a colophon post ("how this site is built") is future content.
+
 ## Architecture
 
 - **Repo:** `stevenfazzio/stevenfazzio.github.io` (public). This is the GitHub
@@ -54,6 +64,12 @@ Two content types:
    line of description plus a link to its blog post. Standalone About/Methodology
    pages inside projects are retired; the blog post is canonical.
 
+A project is not necessarily a map or a tool: a scrollytelling essay or
+explorable explanation is also a project. The embedding rule relocates
+interactivity to project pages; it does not exclude it from the body of work.
+When the project is itself narrative, the blog post remains the canonical
+write-up even though the project is the canonical experience.
+
 ### Embedding rule
 
 Blog posts embed **nothing that executes**. No iframes, no plotly, no datamaps.
@@ -61,6 +77,8 @@ Interactive work is represented by a static asset linking to the full-page
 artifact. Rationale: full-text RSS (embeds break in readers), datamaps are
 hostile to partial-viewport embedding, and the blog stays maintenance-free
 forever (text and images only; only project pages carry JS that can rot).
+A corollary: posts are plain Markdown (`.md`), never MDX. No post needs
+components, and plain Markdown keeps full-text RSS rendering trivial.
 
 Animated loops (GIF, or preferably looping muted WebM/MP4) count as static
 assets and are encouraged: a short pan/zoom/hover loop is the best preview of
@@ -86,7 +104,9 @@ Every datamap project post includes one inline sentence of explanation plus a
 link to the explainer; the link is for depth, not basic comprehension. Keep the
 explainer maintained as the canonical reference.
 
-### Frontmatter schema (required fields)
+### Frontmatter schema
+
+Required:
 
 - `title`
 - `date`
@@ -94,22 +114,68 @@ explainer maintained as the canonical reference.
 - `heroImage`
 - `draft` (boolean; drafts excluded from build)
 
+Optional:
+
+- `updated` (date of last substantive revision; see "Dates and revisions")
+
+### Dates and revisions
+
+- Every post displays its publish date, in the byline and on the post index.
+  Undated articles are a trust failure.
+- Post slugs never contain dates; post URLs should look as permanent as
+  project URLs.
+- Write-ups and essays are dated artifacts: published once, then frozen apart
+  from typo fixes (typo fixes do not bump `updated`).
+- Reference posts (the datamap explainer) are maintained documents:
+  substantive edits set `updated`, and the byline shows both dates when they
+  differ ("Published March 2026, updated July 2026").
+- A substantive revision gets a one-line note at the end of the post
+  ("Revised July 2026: rewrote the clustering section") plus a link to the
+  file's GitHub history; the public repo is the provenance record.
+- RSS chronology keys off `date`, not `updated`.
+
 ## Pages
 
 - `/` — homepage: one-liner, recent posts, pointer to projects.
 - `/posts/` — post index and individual posts.
 - `/projects/` — full index of all shareable projects. Populated completely at
-  launch; this is the primary discovery surface.
+  launch; this is the primary discovery surface. Backed by a typed content
+  collection (name, one-liner, project URL, thumbnail, link to the write-up
+  once it exists) so the index is data-driven and `publish-project` appends
+  an entry.
 - `/about/` — who I am, what I do, plus one sentence: available for consulting
   through Fazzio Consulting, with a contact link. No dedicated /consulting page
   until a prospect asks a question /about can't answer.
 - `/rss.xml` (or `/feed/`) — full-text RSS of everything. All image URLs
   absolute.
+- Email subscription — an RSS-mirror newsletter (Buttondown or similar): the
+  email is the feed, no produced newsletter content. The signup form ships
+  before the first promoted post; traffic spikes are when an audience
+  accumulates, and capture cannot be backfilled.
 
 Every page gets OG/social card tags. Discovery channels are HN, Reddit,
-Bluesky, and Twitter/X (ML/AI discourse is split across the last two;
-cross-post to both). Syndication model is POSSE: the site is canonical,
-social posts are pointers. The card image is what gets clicked.
+Bluesky, Twitter/X, and LinkedIn (ML/AI discourse is split across Bluesky and
+Twitter/X, so cross-post to both; LinkedIn is where employers and consulting
+prospects live). Syndication model is POSSE: the site is canonical, social
+posts are pointers. The card image is what gets clicked.
+
+Machine legibility is a discovery channel of equal rank: a growing share of
+"who does interesting work on X" questions are answered by LLMs with search
+access. Every page carries JSON-LD (Person on the homepage and `/about/`,
+BlogPosting on posts), `rel="me"` links tie the site to GitHub and social
+profiles, and the site serves an `llms.txt`. Stable canonical URLs and clean
+semantic HTML are part of the same story.
+
+## Analytics
+
+Plausible, as a single site registered for `stevenfazzio.com`. The domain
+cascade puts the blog and every project on one domain, so one dashboard
+covers everything, with paths separating blog from projects; referrer flows
+between them measure the site's first purpose (do visitors who land on one
+project discover the others?). Outbound link tracking measures which posts
+drive clicks into the interactives. Existing per-project Plausible sites
+consolidate into the domain site when the custom domain flips. Cookieless;
+no consent banner.
 
 ## Naming policy
 
@@ -121,6 +187,8 @@ Project repo names become URL paths, so:
 - no dates or version numbers; project URLs should look permanent
 - **Reserved paths, never used as repo names:** `posts`, `projects`, `about`,
   `feed`, `rss`, `tags`
+- Post slugs follow the same style: lowercase kebab-case, no dates (see
+  "Dates and revisions")
 
 ## Project standardization
 
@@ -137,7 +205,8 @@ Each shared project repo gets, via a `publish-project` checklist skill:
 1. Deploy placeholder page first; verify custom domain works and an existing
    project subpath (e.g. `stevenfazzio.com/semantic-github-map/`) resolves.
 2. Templates: homepage, post layout, `/projects/` (fully populated with all ~11
-   projects), `/about/`, RSS, OG tags.
+   projects), `/about/`, RSS, OG tags, machine-legibility tags (JSON-LD,
+   `rel="me"`, `llms.txt`), footer license line, Plausible, email signup.
 3. First post: atlantic-mirror (draft in progress; not a datamap, no explainer
    dependency). The "What is a datamap?" explainer lands before the first
    datamap project post.
@@ -153,10 +222,18 @@ Structure first, aesthetics second. Ship with near-default styling, then do a
 dedicated design pass in a separate session. Cartographic identity is the
 long-term aesthetic direction.
 
+## Licensing
+
+Post text and images: CC BY 4.0, stated in the site footer. Site code
+(templates, config): MIT. Project repos carry their own licenses. Declared
+from day one; retroactive licensing is ambiguous.
+
 ## Non-goals (for now)
 
-- Tags, search, dark-mode toggle, comments, analytics, newsletter. Revisit tags
-  at ~20 posts if the need is felt. Do not let the agent volunteer these.
+- Tags, search, dark-mode toggle, comments. Revisit tags at ~20 posts if the
+  need is felt. Do not let the agent volunteer these.
+- A produced newsletter. The RSS-mirror email exists so followers can
+  subscribe by email; writing newsletter-only content is out of scope.
 - Video/audio production, meaning produced content (talking-head video,
   podcasts). Animated previews of interactive work are in scope; see the
   embedding rule.
