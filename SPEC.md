@@ -97,6 +97,13 @@ Every project post follows the inverted pyramid:
 4. **Technical appendix** — prompts, model parameters, pipeline details.
    A plain heading, not `<details>` (renders inconsistently in feed readers).
 
+The quality bar: a post must be worth reading by someone who never clicks
+through to the artifact. Posts are guided tours (what to look at, what was
+found, why it matters), not captions. If a draft adds nothing beyond "I made
+a thing, here's the link", it is not ready to publish. The press-release
+archive is this architecture's failure mode, and it is a content failure the
+structure cannot prevent; this bar is what prevents it.
+
 ### Datamap explainer
 
 An evergreen "What is a datamap?" post is written early (first or second post).
@@ -136,7 +143,9 @@ Optional:
 
 ## Pages
 
-- `/` — homepage: one-liner, recent posts, pointer to projects.
+- `/` — homepage: one-liner, featured projects (a hand-picked row of about
+  three: best work, not latest), recent posts, pointer to the full projects
+  index. The drive-by visitor gets the best shot first, not the most recent.
 - `/posts/` — post index and individual posts.
 - `/projects/` — full index of all shareable projects. Populated completely at
   launch; this is the primary discovery surface. Backed by a typed content
