@@ -1,0 +1,4 @@
+name: OEIS Map
+oneLiner: An interactive semantic map of the Online Encyclopedia of Integer Sequences.
+url: https://stevenfazzio.com/oeisdata-map/
+order: 10

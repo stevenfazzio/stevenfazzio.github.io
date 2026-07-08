@@ -1,0 +1,5 @@
+name: Jeopardy Map
+oneLiner: An interactive semantic map of Jeopardy clues, laid out by topic.
+# Repo not yet published to GitHub; flip to true (and add url) once it serves.
+published: false
+order: 8

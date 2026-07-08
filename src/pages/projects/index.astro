@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects', ({ data }) => data.published)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base
+  title="Projects"
+  description="Interactive maps and visualizations by Steven Fazzio: datamaps of large text collections and other projects."
+>
+  <h1>Projects</h1>
+  <p>
+    Interactive artifacts, mostly maps of large text collections. Each one gets a blog post telling
+    its story; the write-up links are filled in as posts are published.
+  </p>
+  <ul class="projects">
+    {
+      projects.map(({ data }) => (
+        <li>
+          <a href={data.url} class="project-name">
+            {data.name}
+          </a>
+          <p class="one-liner">
+            {data.oneLiner}
+            {data.post && (
+              <>
+                {' '}
+                <a href={data.post}>Read the write-up →</a>
+              </>
+            )}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  .projects {
+    list-style: none;
+    padding: 0;
+  }
+  .projects li {
+    margin-bottom: 1.5rem;
+  }
+  .project-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .one-liner {
+    margin: 0.25rem 0 0;
+  }
+</style>

@@ -1,21 +1,81 @@
 ---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { ONE_LINER, ONE_LINER_GLOSS, AUTHOR, SITE_URL, GITHUB_URL, CONTACT_EMAIL } from '../consts';
+
+const featured = (await getCollection('projects', ({ data }) => data.featured && data.published)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const recent = posts.slice(0, 5);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: AUTHOR,
+  url: SITE_URL,
+  description: ONE_LINER,
+  email: `mailto:${CONTACT_EMAIL}`,
+  sameAs: [GITHUB_URL],
+};
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Steven Fazzio</title>
-    <meta name="description" content="I make maps of large text collections." />
-  </head>
-  <body>
-    <main>
-      <h1>Steven Fazzio</h1>
-      <p>I make maps of large text collections.</p>
-      <p>
-        This site is under construction. In the meantime, you can find my work
-        on <a href="https://github.com/stevenfazzio">GitHub</a>.
-      </p>
-    </main>
-  </body>
-</html>
+<Base jsonLd={jsonLd}>
+  <h1>{ONE_LINER}</h1>
+  <p>{ONE_LINER_GLOSS}</p>
+
+  <section>
+    <h2>Featured projects</h2>
+    <ul class="project-list">
+      {
+        featured.map(({ data }) => (
+          <li>
+            <a href={data.url}>{data.name}</a> — {data.oneLiner}
+          </li>
+        ))
+      }
+    </ul>
+    <p><a href="/projects/">All projects →</a></p>
+  </section>
+
+  {
+    recent.length > 0 && (
+      <section>
+        <h2>Recent posts</h2>
+        <ul class="post-list">
+          {recent.map((post) => (
+            <li>
+              <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+              <span class="post-date">
+                {post.data.date.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                  timeZone: 'UTC',
+                })}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p>
+          <a href="/posts/">All posts →</a>
+        </p>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .project-list li,
+  .post-list li {
+    margin-bottom: 0.5rem;
+  }
+  .post-date {
+    color: #555;
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+  }
+</style>

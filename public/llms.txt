@@ -1,0 +1,19 @@
+# Steven Fazzio
+
+> Personal site and blog of Steven Fazzio, a data scientist who makes interactive
+> maps of large text collections (embeddings, clustering, interactive datamaps).
+> The blog post is the canonical write-up for every project; the interactive
+> artifacts themselves are served at subpaths of this domain (one project per
+> subpath, e.g. https://stevenfazzio.com/semantic-github-map/).
+
+## Pages
+
+- [Posts](https://stevenfazzio.com/posts/): project write-ups, explainers, and essays
+- [Projects](https://stevenfazzio.com/projects/): index of all interactive projects
+- [About](https://stevenfazzio.com/about/): who Steven is, what he does, contact
+- [RSS](https://stevenfazzio.com/rss.xml): full-text feed of all posts
+
+## Contact
+
+- Email: steven@stevenfazzio.com
+- GitHub: https://github.com/stevenfazzio

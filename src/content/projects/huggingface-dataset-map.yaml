@@ -1,0 +1,4 @@
+name: Hugging Face Dataset Map
+oneLiner: An interactive map of the top Hugging Face datasets, positioned by semantic similarity of their dataset cards.
+url: https://stevenfazzio.com/huggingface-dataset-map/
+order: 9

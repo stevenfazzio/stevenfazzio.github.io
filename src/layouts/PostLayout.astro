@@ -1,0 +1,55 @@
+---
+import Base from './Base.astro';
+import { AUTHOR, SITE_URL } from '../consts';
+
+interface Props {
+  id: string;
+  title: string;
+  date: Date;
+  description: string;
+  heroImage: string;
+  updated?: Date;
+}
+
+const { id, title, date, description, heroImage, updated } = Astro.props;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  image: new URL(heroImage, SITE_URL).href,
+  datePublished: date.toISOString(),
+  dateModified: (updated ?? date).toISOString(),
+  author: { '@type': 'Person', name: AUTHOR, url: SITE_URL },
+  mainEntityOfPage: new URL(`/posts/${id}/`, SITE_URL).href,
+};
+---
+
+<Base title={title} description={description} ogImage={heroImage} ogType="article" jsonLd={jsonLd}>
+  <article>
+    <h1>{title}</h1>
+    <p class="byline">
+      Published <time datetime={date.toISOString().slice(0, 10)}>{fmt(date)}</time>
+      {
+        updated && (
+          <>
+            {' '}
+            · Updated <time datetime={updated.toISOString().slice(0, 10)}>{fmt(updated)}</time>
+          </>
+        )
+      }
+    </p>
+    <img src={heroImage} alt="" class="hero" />
+    <slot />
+  </article>
+</Base>
+
+<style>
+  .hero {
+    margin: 1rem 0;
+  }
+</style>

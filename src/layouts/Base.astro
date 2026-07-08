@@ -1,0 +1,168 @@
+---
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  AUTHOR,
+  CONTACT_EMAIL,
+  GITHUB_URL,
+  BUTTONDOWN_USERNAME,
+} from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string; // root-relative path, e.g. /images/posts/foo/hero.png
+  ogType?: string;
+  jsonLd?: object;
+}
+
+const { title, description = SITE_DESCRIPTION, ogImage, ogType = 'website', jsonLd } = Astro.props;
+
+const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageAbs = ogImage ? new URL(ogImage, Astro.site) : undefined;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="me" href={GITHUB_URL} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE_TITLE}
+      href={new URL('rss.xml', Astro.site)}
+    />
+
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:title" content={title ?? SITE_TITLE} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    {ogImageAbs && <meta property="og:image" content={ogImageAbs} />}
+    <meta name="twitter:card" content={ogImageAbs ? 'summary_large_image' : 'summary'} />
+    {ogImageAbs && <meta name="twitter:image" content={ogImageAbs} />}
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <script defer data-domain="stevenfazzio.com" src="https://plausible.io/js/script.outbound-links.js"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/" class="site-title">{SITE_TITLE}</a>
+        <div class="nav-links">
+          <a href="/posts/">Posts</a>
+          <a href="/projects/">Projects</a>
+          <a href="/about/">About</a>
+          <a href="/rss.xml">RSS</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p class="subscribe">
+        {
+          BUTTONDOWN_USERNAME ? (
+            <form
+              action={`https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`}
+              method="post"
+            >
+              <label for="bd-email">Get new posts by email:</label>
+              <input type="email" name="email" id="bd-email" placeholder="you@example.com" required />
+              <button type="submit">Subscribe</button>
+            </form>
+          ) : (
+            <span>
+              Follow along via <a href="/rss.xml">RSS</a>.
+            </span>
+          )
+        }
+      </p>
+      <p class="fine-print">
+        © {new Date().getFullYear()} {AUTHOR} · text and images
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · site code
+        <a href="https://github.com/stevenfazzio/stevenfazzio.github.io">MIT</a> ·
+        <a rel="me" href={GITHUB_URL}>GitHub</a> ·
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: light;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family:
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+    line-height: 1.6;
+    color: #1a1a1a;
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 1rem 1.25rem 3rem;
+  }
+  a {
+    color: #0b5fa5;
+  }
+  header nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    padding: 0.5rem 0 1.5rem;
+  }
+  .site-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+  .nav-links a {
+    color: inherit;
+  }
+  h1 {
+    line-height: 1.25;
+  }
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.85rem;
+    color: #555;
+  }
+  footer a {
+    color: inherit;
+  }
+  .byline {
+    color: #555;
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
+  }
+</style>

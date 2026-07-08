@@ -1,0 +1,5 @@
+name: Steam Atlas
+oneLiner: An interactive semantic atlas of the top 10,000 games on Steam.
+url: https://stevenfazzio.com/steam-atlas/
+featured: true
+order: 3

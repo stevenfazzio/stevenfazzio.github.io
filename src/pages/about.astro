@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { AUTHOR, SITE_URL, GITHUB_URL, CONTACT_EMAIL } from '../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: AUTHOR,
+  url: SITE_URL,
+  description: 'Data scientist making interactive maps of large text collections.',
+  email: `mailto:${CONTACT_EMAIL}`,
+  sameAs: [GITHUB_URL],
+};
+---
+
+<Base title="About" description="Who Steven Fazzio is and what he does." jsonLd={jsonLd}>
+  <h1>About</h1>
+  <p>
+    I'm Steven Fazzio. I'm a data scientist, but the through-line of my work is closer to
+    "storyteller who codes." These days that mostly means making maps of large text collections:
+    take a corpus (every game on Steam, five years of research papers, a video store's rental
+    catalog), embed it, lay it out in two dimensions, and label the regions so you can actually
+    explore the thing. If that sounds abstract, the <a href="/projects/">projects page</a> is the
+    fastest way to see what I mean.
+  </p>
+  <p>
+    I've worked at tech startups on marketing, data science, and engineering teams. I wrote my
+    first (very small) language model about twenty years ago and have been hooked on computing with
+    natural language ever since. My current interests sit at the intersection of NLP, embeddings,
+    and data visualization, with a growing conviction that interactive visualization is a narrative
+    medium: a good map isn't a chart, it's a place to wander around in.
+  </p>
+  <p>
+    This site is the canonical home for my work. Every project gets a write-up here, the
+    interactive artifacts live at subpaths of this domain, and everything is available by
+    <a href="/rss.xml">RSS</a>.
+  </p>
+  <p>
+    I'm available for consulting through Fazzio Consulting. If you have a large pile of text and
+    questions about what's inside it, <a href={`mailto:${CONTACT_EMAIL}`}>get in touch</a>.
+  </p>
+  <p>
+    You can also find me on <a rel="me" href={GITHUB_URL}>GitHub</a>.
+  </p>
+</Base>
