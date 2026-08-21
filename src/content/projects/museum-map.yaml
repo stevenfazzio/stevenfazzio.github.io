@@ -1,0 +1,6 @@
+name: Museum Map
+oneLiner: "A semantic map of every museum in the world with a Wikipedia article: 54,778 of them across 158 languages, placed by what their article says they're about."
+url: https://stevenfazzio.com/museum-map/
+thumbnail: /images/projects/museum-map.webp
+featured: true
+order: 1

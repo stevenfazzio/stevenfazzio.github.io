@@ -1,5 +1,5 @@
 name: Atlantic Mirror
 oneLiner: "A two-way mirror between European and US cities: which US city each European city resembles in character, and vice versa."
 url: https://stevenfazzio.com/atlantic-mirror/
-featured: true
-order: 2
+thumbnail: /images/projects/atlantic-mirror.webp
+order: 4

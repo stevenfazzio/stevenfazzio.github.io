@@ -231,6 +231,16 @@ Structure first, aesthetics second. Ship with near-default styling, then do a
 dedicated design pass in a separate session. Cartographic identity is the
 long-term aesthetic direction.
 
+Amended 2026-08-21: a *light* design pass landed early, ahead of the first
+post, because the site had to carry a job application. It is scoped to
+tokens — a type scale, spacing rhythm, and a palette — plus thumbnails on
+`/projects/`. Cartographic identity remains the deferred, larger pass.
+
+Dark mode follows `prefers-color-scheme` only. The non-goal below rules out a
+dark-mode *toggle*, which this is not: every project map renders on near-black,
+so a hardcoded white page framing dark thumbnails read as an accident rather
+than a choice.
+
 ## Licensing
 
 Post text and images: CC BY 4.0, stated in the site footer. Site code
@@ -239,7 +249,8 @@ from day one; retroactive licensing is ambiguous.
 
 ## Non-goals (for now)
 
-- Tags, search, dark-mode toggle, comments. Revisit tags at ~20 posts if the
+- Tags, search, dark-mode toggle (the OS-preference block is not one; see
+  Design), comments. Revisit tags at ~20 posts if the
   need is felt. Do not let the agent volunteer these.
 - A produced newsletter. The RSS-mirror email exists so followers can
   subscribe by email; writing newsletter-only content is out of scope.

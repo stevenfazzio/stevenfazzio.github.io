@@ -1,0 +1,6 @@
+name: Living People Map
+oneLiner: "An interactive map of the 25,000 most-famous living people, positioned by what their Wikipedia articles say. Built from embeddings with gender projected out, with an unmodified control map alongside it."
+url: https://stevenfazzio.com/living-people-map/
+thumbnail: /images/projects/living-people-map.webp
+featured: true
+order: 2

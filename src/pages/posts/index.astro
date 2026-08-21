@@ -36,20 +36,22 @@ const fmt = (d: Date) =>
   .posts {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
   .posts li {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-4);
   }
   .posts li > a {
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: var(--step-1);
   }
   .post-date {
-    color: #555;
+    color: var(--muted);
     font-size: 0.85rem;
-    margin-left: 0.5rem;
+    margin-left: var(--space-2);
   }
   .post-desc {
-    margin: 0.25rem 0 0;
+    margin: var(--space-1) 0 0;
+    color: var(--muted);
   }
 </style>

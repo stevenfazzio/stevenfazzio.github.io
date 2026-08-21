@@ -5,7 +5,10 @@ import {
   AUTHOR,
   CONTACT_EMAIL,
   GITHUB_URL,
+  LINKEDIN_URL,
+  PROFILES,
   BUTTONDOWN_USERNAME,
+  OG_IMAGE_DEFAULT,
 } from '../consts';
 
 interface Props {
@@ -16,11 +19,17 @@ interface Props {
   jsonLd?: object;
 }
 
-const { title, description = SITE_DESCRIPTION, ogImage, ogType = 'website', jsonLd } = Astro.props;
+const {
+  title,
+  description = SITE_DESCRIPTION,
+  ogImage = OG_IMAGE_DEFAULT,
+  ogType = 'website',
+  jsonLd,
+} = Astro.props;
 
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImageAbs = ogImage ? new URL(ogImage, Astro.site) : undefined;
+const ogImageAbs = new URL(ogImage, Astro.site);
 ---
 
 <html lang="en">
@@ -31,7 +40,7 @@ const ogImageAbs = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="me" href={GITHUB_URL} />
+    {PROFILES.map((url) => <link rel="me" href={url} />)}
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -44,9 +53,9 @@ const ogImageAbs = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
-    {ogImageAbs && <meta property="og:image" content={ogImageAbs} />}
-    <meta name="twitter:card" content={ogImageAbs ? 'summary_large_image' : 'summary'} />
-    {ogImageAbs && <meta name="twitter:image" content={ogImageAbs} />}
+    <meta property="og:image" content={ogImageAbs} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageAbs} />
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
@@ -92,6 +101,7 @@ const ogImageAbs = ogImage ? new URL(ogImage, Astro.site) : undefined;
         <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · site code
         <a href="https://github.com/stevenfazzio/stevenfazzio.github.io">MIT</a> ·
         <a rel="me" href={GITHUB_URL}>GitHub</a> ·
+        <a rel="me" href={LINKEDIN_URL}>LinkedIn</a> ·
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </p>
     </footer>
@@ -99,12 +109,55 @@ const ogImageAbs = ogImage ? new URL(ogImage, Astro.site) : undefined;
 </html>
 
 <style is:global>
+  /* Light is the default; the dark palette below mirrors the near-black the
+     interactive maps render on, so thumbnails sit in the page instead of
+     punching a hole in it. Not the dark-mode *toggle* the spec rules out --
+     this just honours the reader's OS setting. */
   :root {
-    color-scheme: light;
+    color-scheme: light dark;
+
+    --bg: #fbfaf8;
+    --surface: #ffffff;
+    --text: #1a1a18;
+    --muted: #67645e;
+    --border: #e5e2db;
+    --accent: #14608f;
+    --accent-hover: #0d4467;
+
+    /* Every page uses --measure, chrome included, so the header never shifts
+       between routes. Content that needs more room breaks out of it locally
+       (see the grid on /projects/) rather than widening the whole page. */
+    --measure: 44rem;
+    --measure-wide: 60rem;
+
+    --step-0: 1.0625rem;
+    --step-1: 1.2rem;
+    --step-2: 1.45rem;
+    --step-3: clamp(1.85rem, 1.45rem + 1.7vw, 2.5rem);
+
+    --space-1: 0.35rem;
+    --space-2: 0.75rem;
+    --space-3: 1.25rem;
+    --space-4: 2rem;
+    --space-5: 3.25rem;
   }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1113;
+      --surface: #16191d;
+      --text: #e9e7e4;
+      --muted: #97948e;
+      --border: #272b30;
+      --accent: #74b6df;
+      --accent-hover: #a3d0ee;
+    }
+  }
+
   * {
     box-sizing: border-box;
   }
+
   body {
     font-family:
       system-ui,
@@ -112,57 +165,172 @@ const ogImageAbs = ogImage ? new URL(ogImage, Astro.site) : undefined;
       'Segoe UI',
       Roboto,
       sans-serif;
-    line-height: 1.6;
-    color: #1a1a1a;
-    max-width: 44rem;
+    font-size: var(--step-0);
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+    max-width: var(--measure);
     margin: 0 auto;
-    padding: 1rem 1.25rem 3rem;
+    padding: var(--space-2) var(--space-3) var(--space-5);
+    -webkit-font-smoothing: antialiased;
   }
+
   a {
-    color: #0b5fa5;
+    color: var(--accent);
+    text-underline-offset: 0.16em;
+    text-decoration-thickness: 0.06em;
   }
+  a:hover {
+    color: var(--accent-hover);
+  }
+
   header nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
-    gap: 0.5rem 1rem;
-    padding: 0.5rem 0 1.5rem;
+    gap: var(--space-1) var(--space-3);
+    padding: var(--space-2) 0 var(--space-4);
   }
   .site-title {
-    font-weight: 700;
-    font-size: 1.15rem;
+    font-weight: 650;
+    font-size: var(--step-1);
+    letter-spacing: -0.011em;
     color: inherit;
     text-decoration: none;
   }
   .nav-links {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-3);
+    font-size: 0.95rem;
   }
   .nav-links a {
-    color: inherit;
+    color: var(--muted);
+    text-decoration: none;
   }
+  .nav-links a:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+
   h1 {
-    line-height: 1.25;
+    font-size: var(--step-3);
+    line-height: 1.15;
+    letter-spacing: -0.021em;
+    text-wrap: balance;
+    margin: 0 0 var(--space-3);
   }
+  h2 {
+    font-size: var(--step-2);
+    line-height: 1.25;
+    letter-spacing: -0.013em;
+    margin: var(--space-5) 0 var(--space-2);
+  }
+  h3 {
+    font-size: var(--step-1);
+    line-height: 1.3;
+    margin: var(--space-4) 0 var(--space-2);
+  }
+
+  p {
+    margin: 0 0 var(--space-3);
+  }
+
+  main section:first-of-type h2 {
+    margin-top: var(--space-4);
+  }
+
   img,
   video {
     max-width: 100%;
     height: auto;
   }
+
   footer {
-    margin-top: 4rem;
-    padding-top: 1rem;
-    border-top: 1px solid #ddd;
+    margin-top: var(--space-5);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border);
     font-size: 0.85rem;
-    color: #555;
+    color: var(--muted);
   }
   footer a {
     color: inherit;
   }
+  footer p {
+    margin: 0 0 var(--space-1);
+  }
+
   .byline {
-    color: #555;
+    color: var(--muted);
     font-size: 0.9rem;
     margin-top: -0.5rem;
+  }
+
+  /* Post bodies are plain Markdown dropped through a slot, so these are the
+     only styles the prose gets. Kept minimal and token-driven so the first
+     post does not land on unstyled code blocks in dark mode. */
+  article :where(ul, ol) {
+    padding-left: 1.35rem;
+  }
+  article li + li {
+    margin-top: var(--space-1);
+  }
+
+  article :where(code) {
+    font-size: 0.9em;
+    background: color-mix(in srgb, var(--border) 55%, transparent);
+    padding: 0.12em 0.34em;
+    border-radius: 4px;
+  }
+  article :where(pre) {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: var(--space-2) var(--space-3);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  article :where(pre) code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  article :where(blockquote) {
+    margin: var(--space-3) 0;
+    padding-left: var(--space-3);
+    border-left: 3px solid var(--border);
+    color: var(--muted);
+  }
+
+  article :where(hr) {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: var(--space-4) 0;
+  }
+
+  article :where(figure) {
+    margin: var(--space-4) 0;
+  }
+  article :where(figcaption) {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: var(--space-1);
+  }
+
+  article :where(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    margin: var(--space-3) 0;
+  }
+  article :where(th, td) {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-1) var(--space-2);
+    text-align: left;
+  }
+  article :where(th) {
+    font-weight: 600;
   }
 </style>

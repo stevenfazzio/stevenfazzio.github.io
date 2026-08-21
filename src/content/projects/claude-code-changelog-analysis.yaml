@@ -1,4 +1,5 @@
 name: Claude Code Changelog Analysis
 oneLiner: "A browsable, LLM-enriched view of Claude Code's changelog: every release, classified and mapped."
 url: https://stevenfazzio.com/claude-code-changelog-analysis/
-order: 7
+thumbnail: /images/projects/claude-code-changelog-analysis.webp
+order: 10

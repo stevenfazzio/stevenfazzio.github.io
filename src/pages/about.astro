@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { AUTHOR, SITE_URL, GITHUB_URL, CONTACT_EMAIL } from '../consts';
+import { AUTHOR, SITE_URL, GITHUB_URL, LINKEDIN_URL, PROFILES, CONTACT_EMAIL } from '../consts';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -9,7 +9,7 @@ const jsonLd = {
   url: SITE_URL,
   description: 'Data scientist making interactive maps of large text collections.',
   email: `mailto:${CONTACT_EMAIL}`,
-  sameAs: [GITHUB_URL],
+  sameAs: PROFILES,
 };
 ---
 
@@ -40,6 +40,7 @@ const jsonLd = {
     questions about what's inside it, <a href={`mailto:${CONTACT_EMAIL}`}>get in touch</a>.
   </p>
   <p>
-    You can also find me on <a rel="me" href={GITHUB_URL}>GitHub</a>.
+    You can also find me on <a rel="me" href={GITHUB_URL}>GitHub</a> and
+    <a rel="me" href={LINKEDIN_URL}>LinkedIn</a>.
   </p>
 </Base>

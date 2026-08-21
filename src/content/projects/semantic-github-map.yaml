@@ -1,5 +1,6 @@
 name: Semantic GitHub Map
 oneLiner: An interactive map of the 10,000 most-starred GitHub repositories, positioned by semantic similarity of their READMEs.
 url: https://stevenfazzio.com/semantic-github-map/
+thumbnail: /images/projects/semantic-github-map.webp
 featured: true
-order: 1
+order: 3
