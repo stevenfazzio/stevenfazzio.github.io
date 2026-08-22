@@ -7,7 +7,7 @@ export const SITE_DESCRIPTION = 'I make maps of large text collections.';
 // The one-liner tracks current focus, not a permanent charter (see SPEC.md).
 export const ONE_LINER = 'I make maps of large text collections.';
 export const ONE_LINER_GLOSS =
-  'I take a corpus, embed it, and turn it into an interactive datamap you can wander around in.';
+  'I embed a corpus, lay it out in two dimensions, and name the regions.';
 
 export const AUTHOR = 'Steven Fazzio';
 export const CONTACT_EMAIL = 'steven@stevenfazzio.com';

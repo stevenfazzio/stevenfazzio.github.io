@@ -37,8 +37,6 @@ const T = [
   ['oeisdata-map', 16000, true],
   ['huggingface-dataset-map', 14000, true],
   ['mh-ai-research', 14000, true],
-  ['ai-trends', 12000, false],
-  ['energy-trends', 12000, false],
 ];
 
 const W = 1200;

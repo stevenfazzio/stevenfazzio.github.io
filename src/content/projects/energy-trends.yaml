@@ -1,5 +1,0 @@
-name: Energy Trends
-oneLiner: "Time-series charts on how much energy humanity produces and consumes, where it comes from, and what it's spent on, rebuilt weekly from public data."
-url: https://stevenfazzio.com/energy-trends/
-thumbnail: /images/projects/energy-trends.webp
-order: 15
