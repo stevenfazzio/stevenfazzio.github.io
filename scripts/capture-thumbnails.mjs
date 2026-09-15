@@ -19,6 +19,10 @@
 // the map's default framing intact. Only DataMapPlot pages take it: the other
 // projects are scrollable documents or a different map engine, where a drag
 // would scroll or re-centre the page instead.
+//
+// A fourth field, `zoom`, is a number of wheel ticks to zoom in at the centre
+// after the nudge, for maps whose default framing fits only one or two labels
+// into the thumbnail.
 import { chromium } from 'playwright';
 import { mkdirSync } from 'fs';
 import sharp from 'sharp';
@@ -38,7 +42,7 @@ const T = [
   ['oeisdata-map', 16000, true],
   ['huggingface-dataset-map', 14000, true],
   ['mh-ai-research', 14000, true],
-  ['ChEBI-20-datamap', 16000, true],
+  ['ChEBI-20-datamap', 16000, true, 3],
 ];
 
 const W = 1200;
@@ -49,7 +53,7 @@ mkdirSync(OUT, { recursive: true });
 const only = process.argv.slice(2);
 const todo = only.length ? T.filter(([path]) => only.includes(path.replace(/\/.*$/, ''))) : T;
 const b = await chromium.launch({ channel: 'chrome' });
-for (const [path, wait, nudge] of todo) {
+for (const [path, wait, nudge, zoom = 0] of todo) {
   const slug = path.replace(/\/.*$/, '');
   const url = path.endsWith('.html')
     ? `https://stevenfazzio.com/${path}`
@@ -65,6 +69,14 @@ for (const [path, wait, nudge] of todo) {
       await p.mouse.down();
       await p.mouse.move(W / 2 + 15, H / 2 + 8, { steps: 6 });
       await p.mouse.up();
+      await p.waitForTimeout(5000);
+    }
+    if (zoom) {
+      await p.mouse.move(W / 2, H / 2);
+      for (let i = 0; i < zoom; i++) {
+        await p.mouse.wheel(0, -50);
+        await p.waitForTimeout(150);
+      }
       await p.waitForTimeout(5000);
     }
     const shot = await p.screenshot();
