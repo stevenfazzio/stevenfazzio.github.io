@@ -1,0 +1,5 @@
+name: ChEBI-20 Molecule Map
+oneLiner: "An interactive semantic map of the 33,008 molecules in ChEBI-20, the MolT5 molecule-captioning benchmark, laid out by what their ChEBI descriptions say and named at five zoom levels."
+url: https://stevenfazzio.com/ChEBI-20-datamap/
+thumbnail: /images/projects/ChEBI-20-datamap.webp
+order: 14

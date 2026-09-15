@@ -7,7 +7,8 @@
 // and skip the download since we drive the system Chrome anyway:
 //
 //   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm i --no-save playwright sharp
-//   node scripts/capture-thumbnails.mjs
+//   node scripts/capture-thumbnails.mjs            # every project
+//   node scripts/capture-thumbnails.mjs <slug>...  # only the named ones
 //
 // Wait times are per-project because the heavier maps keep painting for a
 // while after networkidle; bump one if its thumbnail comes out half-drawn.
@@ -37,6 +38,7 @@ const T = [
   ['oeisdata-map', 16000, true],
   ['huggingface-dataset-map', 14000, true],
   ['mh-ai-research', 14000, true],
+  ['ChEBI-20-datamap', 16000, true],
 ];
 
 const W = 1200;
@@ -44,8 +46,10 @@ const H = 750;
 const OUT = new URL('../public/images/projects/', import.meta.url).pathname;
 mkdirSync(OUT, { recursive: true });
 
+const only = process.argv.slice(2);
+const todo = only.length ? T.filter(([path]) => only.includes(path.replace(/\/.*$/, ''))) : T;
 const b = await chromium.launch({ channel: 'chrome' });
-for (const [path, wait, nudge] of T) {
+for (const [path, wait, nudge] of todo) {
   const slug = path.replace(/\/.*$/, '');
   const url = path.endsWith('.html')
     ? `https://stevenfazzio.com/${path}`
