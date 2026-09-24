@@ -43,6 +43,7 @@ const T = [
   ['huggingface-dataset-map', 14000, true],
   ['mh-ai-research', 14000, true],
   ['ChEBI-20-datamap', 16000, true, 3],
+  ['sep-datamap', 12000, true, 2],
 ];
 
 const W = 1200;

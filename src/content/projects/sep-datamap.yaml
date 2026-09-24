@@ -1,0 +1,5 @@
+name: Stanford Encyclopedia of Philosophy Map
+oneLiner: "An interactive semantic map of the 1,866 entries in the Stanford Encyclopedia of Philosophy, laid out by what each entry's lead section says and named at four zoom levels."
+url: https://stevenfazzio.com/sep-datamap/
+thumbnail: /images/projects/sep-datamap.webp
+order: 15
