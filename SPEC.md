@@ -22,7 +22,7 @@ One-liner for the homepage:
 > I make maps of large text collections.
 
 Second sentence carries the technical gloss (embeddings, clustering, interactive
-datamaps) for readers who want it.
+data maps) for readers who want it.
 
 The one-liner describes **current focus**, not a permanent charter. Revise it
 freely as research interests evolve; a specific sentence revised annually beats
@@ -72,9 +72,9 @@ write-up even though the project is the canonical experience.
 
 ### Embedding rule
 
-Blog posts embed **nothing that executes**. No iframes, no plotly, no datamaps.
+Blog posts embed **nothing that executes**. No iframes, no plotly, no data maps.
 Interactive work is represented by a static asset linking to the full-page
-artifact. Rationale: full-text RSS (embeds break in readers), datamaps are
+artifact. Rationale: full-text RSS (embeds break in readers), data maps are
 hostile to partial-viewport embedding, and the blog stays maintenance-free
 forever (text and images only; only project pages carry JS that can rot).
 A corollary: posts are plain Markdown (`.md`), never MDX. No post needs
@@ -104,10 +104,21 @@ a thing, here's the link", it is not ready to publish. The press-release
 archive is this architecture's failure mode, and it is a content failure the
 structure cannot prevent; this bar is what prevents it.
 
-### Datamap explainer
+Amended 2026-09-20: a second, lighter post type, the **project note**, is the
+default write-up for the project backlog. About 300 words in four fixed parts:
+what it is, what to look at first, one thing found, how it was made (three
+sentences plus a README link). The guided-tour bar above still applies to
+essays and to flagship write-ups, and a note can grow into one when the
+project earns it. The reason: ten weeks after launch there were fourteen
+projects on the index and zero posts. The bar was blocking output, and a
+drive-by visitor with no write-up at all is worse off than one with a short,
+accurate one. Notes are written from Steven's own words, gathered by
+interview; the process is in the `social` repo spec (`~/repos/social/SPEC.md`).
 
-An evergreen "What is a datamap?" post is written early (first or second post).
-Every datamap project post includes one inline sentence of explanation plus a
+### Data map explainer
+
+An evergreen "What is a data map?" post is written early (first or second post).
+Every data map project post includes one inline sentence of explanation plus a
 link to the explainer; the link is for depth, not basic comprehension. Keep the
 explainer maintained as the canonical reference.
 
@@ -133,7 +144,7 @@ Optional:
   project URLs.
 - Write-ups and essays are dated artifacts: published once, then frozen apart
   from typo fixes (typo fixes do not bump `updated`).
-- Reference posts (the datamap explainer) are maintained documents:
+- Reference posts (the data map explainer) are maintained documents:
   substantive edits set `updated`, and the byline shows both dates when they
   differ ("Published March 2026, updated July 2026").
 - A substantive revision gets a one-line note at the end of the post
@@ -161,12 +172,20 @@ Optional:
   email is the feed, no produced newsletter content. The signup form ships
   before the first promoted post; traffic spikes are when an audience
   accumulates, and capture cannot be backfilled.
+  Reaffirmed 2026-09-20 as a blocking step: the Buttondown account exists and
+  `BUTTONDOWN_USERNAME` is set before the first share goes out.
 
 Every page gets OG/social card tags. Discovery channels are HN, Reddit,
 Bluesky, Twitter/X, and LinkedIn (ML/AI discourse is split across Bluesky and
 Twitter/X, so cross-post to both; LinkedIn is where employers and consulting
 prospects live). Syndication model is POSSE: the site is canonical, social
 posts are pointers. The card image is what gets clicked.
+
+Amended 2026-09-20: channels are HN, Bluesky, and Reddit. X and LinkedIn are
+deferred; the current goal is a following, not employer visibility. Reddit
+targets the community that cares about each map's corpus before any
+data-science subreddit. Per-channel practice, the share log, and the audit
+checklist live in the `social` repo.
 
 Machine legibility is a discovery channel of equal rank: a growing share of
 "who does interesting work on X" questions are answered by LLMs with search
@@ -199,6 +218,10 @@ Project repo names become URL paths, so:
 - Post slugs follow the same style: lowercase kebab-case, no dates (see
   "Dates and revisions")
 
+Amended 2026-09-29: the term is "data map", two words, in all prose. That is
+the spelling DataMapPlot's own documentation uses. Identifiers keep their
+spelling: existing repo names, URLs, and the `datamap` skill.
+
 ## Project standardization
 
 Each shared project repo gets, via a `publish-project` checklist skill:
@@ -216,14 +239,21 @@ Each shared project repo gets, via a `publish-project` checklist skill:
 2. Templates: homepage, post layout, `/projects/` (fully populated with all ~11
    projects), `/about/`, RSS, OG tags, machine-legibility tags (JSON-LD,
    `rel="me"`, `llms.txt`), footer license line, Plausible, email signup.
-3. First post: atlantic-mirror (draft in progress; not a datamap, no explainer
-   dependency). The "What is a datamap?" explainer lands before the first
-   datamap project post.
+3. First post: atlantic-mirror (draft in progress; not a data map, no explainer
+   dependency). The "What is a data map?" explainer lands before the first
+   data map project post.
 4. Release backlog posts roughly weekly, ordered by shareability. Do not
    backdate. ~11 projects = 2+ months of cadence runway.
 5. Skills last: `write-post` (skeleton + frontmatter) and `publish-project`
    (checklist above), encoding what phases 2–3 taught us. `CLAUDE.md` points at
    this spec and the skills.
+
+Amended 2026-09-20: steps 3 and 4 are superseded. The data map explainer is the
+first post. Every project is audited before its note is written and shared;
+the audit removes brittle and nonstandard features and adds none. Cadence is
+two or three projects per week, with HN limited to a curated subset. The
+inventory is sixteen projects, not eleven. Step 5 stands: the skills are
+written after the loop has run a few times.
 
 ## Design
 
