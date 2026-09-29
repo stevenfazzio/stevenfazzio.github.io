@@ -219,8 +219,10 @@ Project repo names become URL paths, so:
   "Dates and revisions")
 
 Amended 2026-09-29: the term is "data map", two words, in all prose. That is
-the spelling DataMapPlot's own documentation uses. Identifiers keep their
-spelling: existing repo names, URLs, and the `datamap` skill.
+the spelling DataMapPlot's own documentation uses. Code identifiers and the
+`datamap` skill keep their spelling. Two unshared repos were renamed the same
+day to drop the term from their URLs: `ChEBI-20-datamap` became
+`chebi-20-map`, and `sep-datamap` became `sep-map`.
 
 ## Project standardization
 
@@ -252,7 +254,7 @@ Amended 2026-09-20: steps 3 and 4 are superseded. The data map explainer is the
 first post. Every project is audited before its note is written and shared;
 the audit removes brittle and nonstandard features and adds none. Cadence is
 two or three projects per week, with HN limited to a curated subset. The
-inventory is sixteen projects, not eleven. Step 5 stands: the skills are
+inventory is seventeen projects, not eleven. Step 5 stands: the skills are
 written after the loop has run a few times.
 
 ## Design
