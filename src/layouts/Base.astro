@@ -59,8 +59,14 @@ const ogImageAbs = new URL(ogImage, Astro.site);
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
-    <script defer data-domain="stevenfazzio.com" src="https://plausible.io/js/script.outbound-links.js"
-    ></script>
+    <!-- Privacy-friendly analytics by Plausible. One site covers the whole
+         domain; project pages carry this same snippet. Outbound-link tracking
+         is a site setting in Plausible now, not a script filename. -->
+    <script is:inline async src="https://plausible.io/js/pa-dvmKWiL1gpqH63wOvMp-g.js"></script>
+    <script is:inline>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
   </head>
   <body>
     <header>
