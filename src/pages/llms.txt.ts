@@ -31,7 +31,7 @@ export const GET: APIRoute = async () => {
   const body = `# Steven Fazzio
 
 > Personal site and blog of Steven Fazzio, a data scientist who makes interactive
-> maps of large text collections (embeddings, clustering, interactive datamaps).
+> maps of large text collections (embeddings, clustering, interactive data maps).
 > The interactive artifacts are served at subpaths of this domain (one project
 > per subpath, e.g. ${SITE_URL}/semantic-github-map/). Write-ups are published
 > as posts and linked from the project entry once they exist.
