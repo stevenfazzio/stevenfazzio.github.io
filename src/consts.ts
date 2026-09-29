@@ -26,4 +26,4 @@ export const OG_IMAGE_DEFAULT = '/images/og-default.png';
 // Buttondown username for the email-signup form. Leave empty to render the
 // RSS-only subscribe line; set it once the Buttondown account exists (must
 // happen before the first promoted post, per SPEC.md).
-export const BUTTONDOWN_USERNAME = '';
+export const BUTTONDOWN_USERNAME = 'sfazzio';
