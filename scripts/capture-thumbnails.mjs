@@ -44,6 +44,7 @@ const T = [
   ['mh-ai-research', 14000, true],
   ['chebi-20-map', 16000, true, 3],
   ['sep-map', 12000, true],
+  ['deity-map', 12000, true],
 ];
 
 const W = 1200;
