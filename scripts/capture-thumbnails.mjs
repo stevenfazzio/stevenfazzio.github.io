@@ -45,6 +45,7 @@ const T = [
   ['chebi-20-map', 16000, true, 3],
   ['sep-map', 12000, true],
   ['deity-map', 12000, true],
+  ['tv-tropes-map', 12000, true, 4],
 ];
 
 const W = 1200;

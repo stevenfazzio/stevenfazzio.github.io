@@ -1,0 +1,5 @@
+name: TV Tropes Map
+oneLiner: "An interactive semantic map of the 28,726 tropes on the TV Tropes wiki, laid out by what each trope's description says and named at four zoom levels."
+url: https://stevenfazzio.com/tv-tropes-map/
+thumbnail: /images/projects/tv-tropes-map.webp
+order: 17
