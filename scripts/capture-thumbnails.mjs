@@ -46,6 +46,8 @@ const T = [
   ['sep-map', 12000, true],
   ['deity-map', 12000, true],
   ['tv-tropes-map', 12000, true, 4],
+  // custom deck.gl page, not DataMapPlot: no nudge (a drag would pan it)
+  ['people-through-time', 12000, false],
 ];
 
 const W = 1200;

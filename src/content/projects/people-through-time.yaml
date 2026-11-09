@@ -1,0 +1,5 @@
+name: People Through Time
+oneLiner: "An interactive map of the 31,000 most famous people of every era, from all Wikipedias, positioned by what their articles say. The slider is itself a chart of the map's regions: drag it through birth years and people glide, appear and fade."
+url: https://stevenfazzio.com/people-through-time/
+thumbnail: /images/projects/people-through-time.webp
+order: 18
