@@ -1,0 +1,6 @@
+name: Riemann Hypothesis Proof Map
+oneLiner: "An interactive semantic map of the 175,013 source files in Levent Alpöge's Lean 4 proof of the Riemann hypothesis, laid out by what each file's theorem statements and definitions say and named at four zoom levels."
+url: https://stevenfazzio.com/riemann-map/
+thumbnail: /images/projects/riemann-map.webp
+featured: true
+order: 1

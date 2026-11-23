@@ -2,4 +2,4 @@ name: OEIS Map
 oneLiner: An interactive semantic map of the Online Encyclopedia of Integer Sequences.
 url: https://stevenfazzio.com/oeisdata-map/
 thumbnail: /images/projects/oeisdata-map.webp
-order: 11
+order: 13

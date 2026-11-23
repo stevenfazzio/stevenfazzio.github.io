@@ -2,4 +2,4 @@ name: Jeopardy Map
 oneLiner: "An interactive semantic map of ~135,000 Jeopardy! clues (2016–2025), laid out by topic, alongside a statistical analysis of the full 1984–2025 archive."
 url: https://stevenfazzio.com/jeopardy-map/
 thumbnail: /images/projects/jeopardy-map.webp
-order: 8
+order: 10

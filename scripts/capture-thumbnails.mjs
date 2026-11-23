@@ -48,6 +48,7 @@ const T = [
   ['tv-tropes-map', 12000, true, 4],
   // custom deck.gl page, not DataMapPlot: no nudge (a drag would pan it)
   ['people-through-time', 12000, false],
+  ['riemann-map', 16000, true],
 ];
 
 const W = 1200;
